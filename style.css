@@ -1,0 +1,317 @@
+:root {
+  --White: hsl(0, 100%, 100%);
+  --Grey-500: hsl(0, 0%, 63%);
+  --Grey-800: hsl(0, 0%, 27%);
+  --Black: hsl(0, 0%, 0%);
+
+  --Font-size: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "League Spartan", sans-serif;
+}
+.container {
+  max-width: 100%;
+}
+#slide-btns {
+  position: absolute;
+  bottom: 0;
+  right: -200px;
+  display: flex;
+  width: fit-content;
+  z-index: 10;
+}
+
+#slide-btns div {
+  background-color: var(--Black);
+  width: 100px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s ease-in-out;
+}
+#slide-btns div:hover {
+  background-color: var(--Grey-800);
+  cursor: pointer;
+}
+
+#hero {
+  display: flex;
+  height: 65vh;
+}
+#hero-header {
+  flex: 1.6;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding-left: 50px;
+  padding-top: 50px;
+  position: relative;
+}
+#hero-header .mobile {
+  display: none;
+}
+#hero-header header {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+#hero-header header img {
+  cursor: pointer;
+}
+#hero-header header ul {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+#hero-header header ul li {
+  color: var(--White);
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+}
+#hero-header header ul li::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 3px;
+  background-color: var(--White);
+  left: 50%;
+  bottom: -8px;
+  transform: translateX(-50%);
+  transition: width 0.3s ease-in-out;
+}
+#hero-header header ul li:hover::after {
+  width: 50%;
+}
+#hero-header header.mobile .menu-mobile {
+  display: none;
+}
+.menu-overlay {
+  display: none;
+}
+/* Hero content */
+#hero-content {
+  flex: 1;
+  padding: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 600;
+  color: var(--Black);
+  margin-bottom: 20px;
+}
+
+#hero-content p {
+  color: var(--Grey-500);
+  font-size: var(--Font-size);
+  font-weight: 600;
+  line-height: 1.5;
+  margin-bottom: 30px;
+  max-width: 400px;
+}
+#hero-content .btn button {
+  background-color: transparent;
+  border: none;
+  color: var(--Grey-800);
+  text-transform: uppercase;
+  font-size: calc(var(--Font-size));
+  font-weight: 600;
+  letter-spacing: 10px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+#hero-content .btn button:hover {
+  color: var(--Grey-500);
+}
+@media (max-width: 1280px) {
+  #hero-content h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Hero Down Section */
+#hero-down {
+  display: flex;
+  height: 35vh;
+}
+#hero-down #img-left,
+#hero-down #img-right {
+  flex: 1;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+#hero-down #img-left {
+  background-image: url(images/image-about-dark.jpg);
+}
+#hero-down #img-right {
+  background-image: url(images/image-about-light.jpg);
+}
+
+#hero-down #about {
+  flex: 0.9;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#hero-down #about h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--Black);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+}
+#hero-down #about p {
+  color: var(--Grey-500);
+  font-size: var(--Font-size);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 1060px) {
+  #hero {
+    height: 62vh;
+  }
+  #hero-down {
+    height: 38vh;
+  }
+  #hero-content {
+    padding: 80px 60px;
+  }
+  #hero-down #about h2 {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    letter-spacing: 3px;
+  }
+  #hero-down #about p {
+    font-size: calc(var(--Font-size) - 1px);
+    font-weight: 500;
+    margin-bottom: 0px;
+  }
+}
+
+@media (max-width: 890px) {
+  #hero {
+    flex-direction: column;
+    height: auto;
+  }
+
+  #hero-header {
+    flex: none;
+    height: 50vh;
+    padding: 0;
+  }
+
+  #hero-content {
+    flex: none;
+    padding: 60px 30px;
+  }
+  #hero-down {
+    flex-direction: column;
+    height: auto;
+  }
+  #hero-down #img-left,
+  #hero-down #img-right {
+    flex: none;
+    height: 30vh;
+  }
+  #hero-down #about {
+    flex: none;
+    padding: 45px 25px;
+  }
+  #hero-down #about h2 {
+    margin-bottom: 12px;
+    letter-spacing: 5px;
+    font-weight: 700;
+  }
+  #slide-btns {
+    right: 0px;
+  }
+  #slide-btns div {
+    width: 60px;
+    height: 55px;
+  }
+  #slide-btns div img {
+    width: 10px;
+  }
+  #hero-content h1 {
+    font-size: 2rem;
+  }
+  #hero-content .btn button {
+    letter-spacing: 5px;
+    margin-right: 10px;
+  }
+  #hero-header header.desktop {
+    display: none;
+  }
+  #hero-header header.mobile {
+    display: block;
+    padding: 40px 25px 40px 25px;
+    position: relative;
+  }
+  #hero-header header.mobile .hamburger {
+    transition: all 0.3s ease-in-out;
+  }
+  #hero-header header.mobile .hamburger:hover {
+    transform: scale(1.1);
+  }
+  #hero-header header.mobile .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  #hero-header header.mobile .menu-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--White);
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 25px 40px 25px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  #hero-header header.mobile .menu-mobile ul {
+    display: flex;
+    gap: 25px;
+  }
+  #hero-header header.mobile .menu-mobile ul li {
+    color: var(--Black);
+    position: relative;
+  }
+  #hero-header header ul li::after {
+    background-color: var(--Black);
+  }
+  #hero-header header.mobile .close {
+    transition: all 0.3s ease-in-out;
+  }
+  #hero-header header.mobile .close:hover {
+    transform: rotate(90deg);
+  }
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+  }
+}
