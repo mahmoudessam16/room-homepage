@@ -26,60 +26,82 @@ const title = document.querySelector(".title");
 const description = document.querySelector(".description");
 const rightArrow = document.querySelector("#slide-right");
 const leftArrow = document.querySelector("#slide-left");
-
-// Initialize state from localStorage safely
-let currentIndex = Number(localStorage.getItem("currentIndex")) || 0;
-
-function saveState() {
-  localStorage.setItem("currentIndex", currentIndex);
-}
-
-function updateRoomData(index) {
-  const data = roomData[index];
-  if (!data) return;
-
-  title.textContent = data.title;
-  description.textContent = data.description;
-  heroHeaderSection.style.backgroundImage = `url(${data.desktopImage})`;
-
-  // Update mobile image
-  window.matchMedia("(max-width: 890px)").matches
-    ? (heroHeaderSection.style.backgroundImage = `url(${data.mobileImage})`)
-    : (heroHeaderSection.style.backgroundImage = `url(${data.desktopImage})`);
-}
-
-rightArrow.addEventListener("click", () => {
-  currentIndex = (currentIndex + 1) % roomData.length;
-  saveState();
-  updateRoomData(currentIndex);
-});
-
-leftArrow.addEventListener("click", () => {
-  currentIndex = (currentIndex - 1 + roomData.length) % roomData.length;
-  saveState();
-  updateRoomData(currentIndex);
-});
-
-// Initial render
-updateRoomData(currentIndex);
-
-// update image on screen resize
-window.addEventListener("resize", () => {
-  updateRoomData(currentIndex);
-});
-
-// Mobile Menu Toggle
 const hamburger = document.querySelector(".hamburger");
 const mobileMenu = document.querySelector(".menu-mobile");
 const menuOverlay = document.querySelector(".menu-overlay");
 const closeIcon = document.querySelector(".close");
 
-hamburger.addEventListener("click", () => {
-  mobileMenu.style.display = "flex";
-  menuOverlay.style.display = "block";
+// Defensive check (production mindset)
+if (!heroHeaderSection || !title || !description) {
+  throw new Error("Critical DOM elements not found");
+}
+
+const mobileMediaQuery = window.matchMedia("(max-width: 890px)");
+
+let currentIndex = Number(localStorage.getItem("currentIndex")) || 0;
+
+// Ensure index is always valid
+if (currentIndex < 0 || currentIndex >= roomData.length) {
+  currentIndex = 0;
+}
+
+// Persist state
+function saveState() {
+  localStorage.setItem("currentIndex", String(currentIndex));
+}
+
+// Get correct image based on screen size
+function getResponsiveImage(data) {
+  return mobileMediaQuery.matches ? data.mobileImage : data.desktopImage;
+}
+
+// Render function (Single source of truth)
+function renderSlide(index) {
+  const data = roomData[index];
+  if (!data) return;
+
+  title.textContent = data.title;
+  description.textContent = data.description;
+
+  const image = getResponsiveImage(data);
+  heroHeaderSection.style.backgroundImage = `url(${image})`;
+}
+
+// Navigation logic (clean & predictable)
+function nextSlide() {
+  currentIndex = (currentIndex + 1) % roomData.length;
+  saveState();
+  renderSlide(currentIndex);
+}
+
+function prevSlide() {
+  currentIndex = (currentIndex - 1 + roomData.length) % roomData.length;
+  saveState();
+  renderSlide(currentIndex);
+}
+
+// Event Listeners (with null safety)
+rightArrow?.addEventListener("click", nextSlide);
+leftArrow?.addEventListener("click", prevSlide);
+
+mobileMediaQuery.addEventListener("change", () => {
+  renderSlide(currentIndex);
 });
 
-closeIcon.addEventListener("click", () => {
-  mobileMenu.style.display = "none";
-  menuOverlay.style.display = "none";
+// Initial render
+renderSlide(currentIndex);
+
+// Mobile Menu Toggle (safe handling)
+hamburger?.addEventListener("click", () => {
+  if (mobileMenu && menuOverlay) {
+    mobileMenu.style.display = "flex";
+    menuOverlay.style.display = "block";
+  }
+});
+
+closeIcon?.addEventListener("click", () => {
+  if (mobileMenu && menuOverlay) {
+    mobileMenu.style.display = "none";
+    menuOverlay.style.display = "none";
+  }
 });

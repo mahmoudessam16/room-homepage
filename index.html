@@ -10,65 +10,75 @@
       href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap"
       rel="stylesheet"
     />
-
     <link rel="stylesheet" href="style.css" />
     <title>Room Homepage</title>
   </head>
   <body>
+    <!-- Overlay خارج main لأنه UI layer -->
     <div class="menu-overlay"></div>
-    <div class="container">
+
+    <main class="container">
+      <!-- Hero Section -->
       <section id="hero">
         <section id="hero-header">
           <div id="slide-btns">
-            <div id="slide-left">
-              <img src="images/icon-angle-left.svg" alt="angle left icon" />
+            <div id="slide-left" aria-label="Previous slide">
+              <img src="images/icon-angle-left.svg" alt="Previous slide" />
             </div>
-            <div id="slide-right">
-              <img src="images/icon-angle-right.svg" alt="angle right icon" />
+            <div id="slide-right" aria-label="Next slide">
+              <img src="images/icon-angle-right.svg" alt="Next slide" />
             </div>
           </div>
-          <header class="desktop">
-            <img src="images/logo.svg" alt="logo" />
 
-            <ul>
-              <li>home</li>
-              <li>shop</li>
-              <li>about</li>
-              <li>contact</li>
-            </ul>
-          </header>
-          <header class="mobile">
-            <img
-              src="images/icon-hamburger.svg"
-              alt="hamburger-icon"
-              class="hamburger"
-            />
-            <img src="images/logo.svg" alt="logo" class="logo" />
-            <div class="menu-mobile">
-              <img src="images/icon-close.svg" alt="close-icon" class="close" />
+          <!-- Desktop Navigation -->
+          <header class="desktop">
+            <nav aria-label="Primary navigation">
+              <img src="images/logo.svg" alt="Room logo" />
               <ul>
                 <li>home</li>
                 <li>shop</li>
                 <li>about</li>
                 <li>contact</li>
               </ul>
-            </div>
+            </nav>
+          </header>
+
+          <!-- Mobile Navigation -->
+          <header class="mobile">
+            <img
+              src="images/icon-hamburger.svg"
+              alt="Open menu"
+              class="hamburger"
+            />
+            <img src="images/logo.svg" alt="Room logo" class="logo" />
+
+            <nav class="menu-mobile" aria-label="Mobile navigation">
+              <img src="images/icon-close.svg" alt="Close menu" class="close" />
+              <ul>
+                <li>home</li>
+                <li>shop</li>
+                <li>about</li>
+                <li>contact</li>
+              </ul>
+            </nav>
           </header>
         </section>
 
+        <!-- Hero Content -->
         <section id="hero-content">
           <h1 class="title"></h1>
           <p class="description"></p>
 
           <div class="btn">
             <button>Shop now</button>
-            <img src="images/icon-arrow.svg" alt="arrow icon" />
+            <img src="images/icon-arrow.svg" alt="Arrow icon" />
           </div>
         </section>
       </section>
 
+      <!-- About Section -->
       <section id="hero-down">
-        <section id="img-left"></section>
+        <section id="img-left" aria-hidden="true"></section>
 
         <section id="about">
           <h2>About our furniture</h2>
@@ -82,16 +92,17 @@
           </p>
         </section>
 
-        <section id="img-right"></section>
+        <section id="img-right" aria-hidden="true"></section>
       </section>
-    </div>
+    </main>
 
     <div class="attribution" style="display: none">
       Challenge by
-      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-        >Frontend Mentor</a
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">
+        Frontend Mentor </a
       >. Coded by <a href="#">Mahmoud Essam</a>.
     </div>
+
     <script src="main.js"></script>
   </body>
 </html>

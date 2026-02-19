@@ -58,7 +58,7 @@ body {
 #hero-header .mobile {
   display: none;
 }
-#hero-header header {
+#hero-header header nav {
   display: flex;
   align-items: center;
   gap: 60px;
